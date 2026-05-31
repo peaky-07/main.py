@@ -1,8 +1,11 @@
 import os
+
 import requests
+
 from telegram import Bot
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
+
 CHAT_ID = os.environ["CHAT_ID"]
 
 bot = Bot(token=BOT_TOKEN)
@@ -18,10 +21,16 @@ def check_store():
     try:
         for url in URLS:
             r = requests.get(url, timeout=30)
+
             if r.status_code == 200:
-                send_message(f"Pokemon Center UK check successful\n{url}")
+                send_message(
+                    f"Pokemon Center UK check successful\n{url}"
+                )
             else:
-                send_message(f"Store check returned {r.status_code}")
+                send_message(
+                    f"Store check returned {r.status_code}"
+                )
+
     except Exception as e:
         send_message(f"Bot error: {e}")
 
